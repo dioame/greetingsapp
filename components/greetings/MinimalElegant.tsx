@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 type Greeting = {
   recipientName: string;
   senderName: string | null;
@@ -59,7 +61,7 @@ export function MinimalElegant({ greeting }: { greeting: Greeting }) {
           </p>
         )}
         <p style={{ marginTop: "2.5rem", fontSize: "0.75rem", letterSpacing: "0.15em", color: textColor, opacity: 0.5 }}>
-          Awesome Greetings By Dioame
+          <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>Awesome Greetings</Link>
         </p>
       </article>
     </div>

@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 type Greeting = {
   recipientName: string;
   senderName: string | null;
@@ -53,7 +55,7 @@ export function PhotoFrame({ greeting }: { greeting: Greeting }) {
           </p>
         )}
         <p style={{ marginTop: "1.5rem", fontSize: "0.7rem", letterSpacing: "0.1em", color: "#8b7355" }}>
-          Awesome Greetings By Dioame
+          <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>Awesome Greetings</Link>
         </p>
       </div>
     </div>

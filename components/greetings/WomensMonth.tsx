@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 type Greeting = {
   recipientName: string;
@@ -104,7 +105,7 @@ export function WomensMonth({ greeting }: { greeting: Greeting }) {
             </p>
           )}
           <p style={{ marginTop: "1.5rem", fontSize: "0.75rem", color: purpleLight }}>
-            Awesome Greetings By Dioame
+            <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>Awesome Greetings</Link>
           </p>
         </div>
       </div>

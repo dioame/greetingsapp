@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
+import Link from "next/link";
 
 type Greeting = {
   recipientName: string;
@@ -272,7 +273,9 @@ export function SwipableBook({ greeting }: { greeting: Greeting }) {
             >
               <div style={{ width: "48px", height: "3px", background: accentColor, marginBottom: "1.5rem" }} />
               <p style={{ color: "rgba(255,255,255,0.9)", fontSize: "1rem" }}>
-                Awesome Greetings By Dioame
+                <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>
+                  Awesome Greetings
+                </Link>
               </p>
               <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.8rem", marginTop: "0.5rem" }}>
                 Made with care

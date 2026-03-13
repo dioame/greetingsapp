@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 type Greeting = {
   recipientName: string;
@@ -79,7 +80,7 @@ export function Typewriter({ greeting }: { greeting: Greeting }) {
         )}
         {display.length >= full.length && (
           <p style={{ marginTop: "1rem", fontSize: "0.75rem", color: inkColor, opacity: 0.5 }}>
-            Awesome Greetings By Dioame
+            <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>Awesome Greetings</Link>
           </p>
         )}
       </div>

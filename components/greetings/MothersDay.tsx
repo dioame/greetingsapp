@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 type Greeting = {
   recipientName: string;
   senderName: string | null;
@@ -78,7 +80,7 @@ export function MothersDay({ greeting }: { greeting: Greeting }) {
           </p>
         )}
         <p style={{ marginTop: "2rem", fontSize: "0.7rem", letterSpacing: "0.15em", color: accent, opacity: 0.7 }}>
-          With love · Awesome Greetings By Dioame
+          With love · <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>Awesome Greetings</Link>
         </p>
       </article>
     </div>

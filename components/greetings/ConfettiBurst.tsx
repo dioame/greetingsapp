@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 type Greeting = {
   recipientName: string;
@@ -123,7 +124,7 @@ export function ConfettiBurst({ greeting }: { greeting: Greeting }) {
           </p>
         )}
         <p style={{ marginTop: "1.5rem", fontSize: "0.8rem", color: "rgba(255,255,255,0.4)" }}>
-          Awesome Greetings By Dioame
+          <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>Awesome Greetings</Link>
         </p>
       </div>
     </div>
