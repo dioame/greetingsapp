@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #0c0a0f;
+  --surface: #16131a;
+  --text: #f5f0f7;
+  --muted: #9b8fa8;
+  --accent: #c77dff;
+  --accent-dim: #7b2cbf;
+  --success: #52b788;
+  --danger: #e07a7a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100%;
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input, textarea {
+  font-family: inherit;
+}
+
+/* Landing page: section entrance and card hover */
+@media (prefers-reduced-motion: reduce) {
+  .landing-section, .landing-hero-inner { animation: none !important; }
+  .landing-card { transition: none !important; }
+}
+@keyframes landingFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.landing-section {
+  animation: landingFadeIn 0.7s ease-out both;
+}
+.landing-section:nth-child(2) { animation-delay: 0.08s; }
+.landing-section:nth-child(3) { animation-delay: 0.12s; }
+.landing-section:nth-child(4) { animation-delay: 0.16s; }
+.landing-section:nth-child(5) { animation-delay: 0.2s; }
+.landing-section:nth-child(6) { animation-delay: 0.24s; }
+.landing-section:nth-child(7) { animation-delay: 0.28s; }
+.landing-section:nth-child(8) { animation-delay: 0.32s; }
+.landing-section:nth-child(9) { animation-delay: 0.36s; }
+.landing-section:nth-child(10) { animation-delay: 0.4s; }
+.landing-hero-inner {
+  animation: landingFadeIn 0.9s ease-out 0.2s both;
+}
+.landing-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.2s ease;
+}
+.landing-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(123, 44, 191, 0.15);
+  border-color: rgba(199, 125, 255, 0.4) !important;
+}
+.landing-cta {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.landing-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(199, 125, 255, 0.35);
+}
+.landing-cta-secondary {
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.landing-cta-secondary:hover {
+  border-color: var(--accent) !important;
+  background-color: rgba(199, 125, 255, 0.08) !important;
+}
