@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === "development" && (!googleClientId || !googleClientS
   );
 }
 
-export const authOptions: NextAuthOptions = {
+export const authOptions = {
   trustHost: true,
   providers: [
     GoogleProvider({
@@ -107,7 +107,7 @@ export const authOptions: NextAuthOptions = {
     error: "/login",
   },
   secret: process.env.NEXTAUTH_SECRET,
-};
+} as NextAuthOptions;
 
 declare module "next-auth" {
   interface User {
