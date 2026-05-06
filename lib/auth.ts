@@ -1,7 +1,7 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { db } from "./turso";
+import { getDb } from "./turso";
 import bcrypt from "bcryptjs";
 import { nanoid } from "nanoid";
 
@@ -37,7 +37,7 @@ export const authOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
-        const r = await db.execute({
+        const r = await getDb().execute({
           sql: "SELECT id, email, password_hash FROM users WHERE email = ?",
           args: [credentials.email],
         });
@@ -58,13 +58,13 @@ export const authOptions = {
     async signIn({ user, account }) {
       try {
         if (account?.provider === "google" && user.email) {
-          const existing = await db.execute({
+          const existing = await getDb().execute({
             sql: "SELECT id FROM users WHERE email = ? OR google_id = ?",
             args: [user.email, user.id ?? ""],
           });
           if (existing.rows.length === 0) {
             const id = nanoid();
-            await db.execute({
+            await getDb().execute({
               sql: "INSERT INTO users (id, email, name, google_id, image) VALUES (?, ?, ?, ?, ?)",
               args: [id, user.email, user.name ?? "", user.id ?? "", user.image ?? null],
             });
@@ -79,7 +79,7 @@ export const authOptions = {
     async jwt({ token, user }) {
       try {
         if (user?.email) {
-          const r = await db.execute({
+          const r = await getDb().execute({
             sql: "SELECT id FROM users WHERE email = ?",
             args: [user.email],
           });

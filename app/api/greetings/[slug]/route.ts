@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/turso";
+import { getDb } from "@/lib/turso";
 
 export async function GET(
   _req: Request,
@@ -8,7 +8,7 @@ export async function GET(
   const { slug } = await params;
   if (!slug) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
-  const r = await db.execute({
+  const r = await getDb().execute({
     sql: `SELECT g.id, g.recipient_name, g.sender_name, g.message, g.expires_at, g.design_id,
           d.slug AS design_slug, d.design_type, d.config_json
           FROM greetings g

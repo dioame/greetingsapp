@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { db } from "@/lib/turso";
+import { getDb } from "@/lib/turso";
+import { syncDefaultGreetingDesigns } from "@/lib/sync-default-greeting-designs";
 import { HeroVectorBg } from "@/components/landing/HeroVectorBg";
 import { SectionDivider } from "@/components/landing/SectionDivider";
 
@@ -50,6 +51,12 @@ function getAccentFromConfig(config: Record<string, unknown>): string {
 
 async function getDesigns(): Promise<{ name: string; description: string; accent: string }[]> {
   try {
+    const db = getDb();
+    try {
+      await syncDefaultGreetingDesigns(db);
+    } catch {
+      /* non-fatal */
+    }
     const r = await db.execute({
       sql: "SELECT name, description, config_json FROM greeting_designs ORDER BY name",
       args: [],

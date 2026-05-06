@@ -167,7 +167,10 @@ export function ChristmasDay({ greeting }: { greeting: Greeting }) {
           </p>
         )}
         <p style={{ marginTop: "1.5rem", fontSize: "0.75rem", color: "rgba(255,255,255,0.45)" }}>
-          <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>Awesome Greetings</Link>
+          Greet with{" "}
+          <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>
+            Awesome Greetings
+          </Link>
         </p>
       </div>
     </div>

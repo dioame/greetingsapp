@@ -54,8 +54,11 @@ export function PhotoFrame({ greeting }: { greeting: Greeting }) {
             — {greeting.senderName}
           </p>
         )}
-        <p style={{ marginTop: "1.5rem", fontSize: "0.7rem", letterSpacing: "0.1em", color: "#8b7355" }}>
-          <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>Awesome Greetings</Link>
+        <p style={{ marginTop: "1.5rem", fontSize: "0.7rem", letterSpacing: "0.08em", color: "#8b7355" }}>
+          Greet with{" "}
+          <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>
+            Awesome Greetings
+          </Link>
         </p>
       </div>
     </div>

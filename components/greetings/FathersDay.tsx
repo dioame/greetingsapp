@@ -75,7 +75,10 @@ export function FathersDay({ greeting }: { greeting: Greeting }) {
           </p>
         )}
         <p style={{ marginTop: "2rem", fontSize: "0.7rem", color: inkColor, opacity: 0.5 }}>
-          <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>Awesome Greetings</Link>
+          Greet with{" "}
+          <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>
+            Awesome Greetings
+          </Link>
         </p>
       </div>
     </div>

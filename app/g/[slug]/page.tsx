@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { db } from "@/lib/turso";
+import { getDb } from "@/lib/turso";
 import { GreetingView } from "./GreetingView";
 
 export const dynamic = "force-dynamic";
@@ -10,7 +10,7 @@ export default async function GreetingPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const r = await db.execute({
+  const r = await getDb().execute({
     sql: `SELECT g.id, g.recipient_name, g.sender_name, g.message, g.expires_at, g.design_id,
           d.slug AS design_slug, d.design_type, d.config_json
           FROM greetings g
@@ -26,7 +26,7 @@ export default async function GreetingPage({
   const row = r.rows[0];
   const expiresAt = new Date(String(row.expires_at));
   if (expiresAt <= new Date()) {
-    await db.execute({ sql: "DELETE FROM greetings WHERE share_slug = ?", args: [slug] });
+    await getDb().execute({ sql: "DELETE FROM greetings WHERE share_slug = ?", args: [slug] });
     notFound();
   }
 

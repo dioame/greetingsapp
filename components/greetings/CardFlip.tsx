@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 type Greeting = {
   recipientName: string;
@@ -114,6 +115,12 @@ export function CardFlip({ greeting }: { greeting: Greeting }) {
               </p>
             )}
             <div style={{ marginTop: "1.5rem", width: "40px", height: "2px", background: accent }} />
+            <p style={{ marginTop: "1.25rem", fontSize: "0.8rem", color: "rgba(255,255,255,0.5)" }}>
+              Greet with{" "}
+              <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>
+                Awesome Greetings
+              </Link>
+            </p>
           </div>
         </div>
       </div>

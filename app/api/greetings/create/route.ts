@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { db } from "@/lib/turso";
+import { getDb } from "@/lib/turso";
+import { syncDefaultGreetingDesigns } from "@/lib/sync-default-greeting-designs";
 import { nanoid } from "nanoid";
 
 const EXPIRY_DAYS = 3;
@@ -18,6 +19,13 @@ export async function POST(req: Request) {
   }
 
   try {
+    const db = getDb();
+    try {
+      await syncDefaultGreetingDesigns(db);
+    } catch (e) {
+      console.error("[api/greetings/create] syncDefaultGreetingDesigns failed:", e);
+    }
+
     const body = await req.json();
     const { designId, recipientName, senderName, message } = body;
     if (!designId || !recipientName || !message) {

@@ -137,8 +137,8 @@ export default function DonatePage() {
 
         <p style={{ color: "var(--muted)", fontSize: "0.85rem", marginTop: "2rem", textAlign: "center" }}>
           Questions? Contact{" "}
-          <a href="mailto:dioamejade@gmail.com" style={{ color: "var(--accent)" }}>
-            dioamejade@gmail.com
+          <a href="mailto:dioamejade.online@gmail.com" style={{ color: "var(--accent)" }}>
+            dioamejade.online@gmail.com
           </a>
         </p>
       </div>

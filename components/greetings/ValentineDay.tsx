@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 type Greeting = {
   recipientName: string;
@@ -181,6 +182,12 @@ export function ValentineDay({ greeting }: { greeting: Greeting }) {
               <span style={{ position: "absolute", bottom: "2.5rem", left: "50%", transform: "translateX(-50%)", fontSize: "1.25rem", color: accent, opacity: 0.8 }}>
                 ♥ ♥ ♥
               </span>
+              <p style={{ marginTop: "2rem", fontSize: "0.75rem", color: "#6b2d3d", opacity: 0.6 }}>
+                Greet with{" "}
+                <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>
+                  Awesome Greetings
+                </Link>
+              </p>
             </>
           ) : (
             <div
@@ -212,6 +219,12 @@ export function ValentineDay({ greeting }: { greeting: Greeting }) {
                   — {greeting.senderName} ♥
                 </p>
               )}
+              <p style={{ marginTop: "1.5rem", fontSize: "0.75rem", color: accent, opacity: 0.75 }}>
+                Greet with{" "}
+                <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>
+                  Awesome Greetings
+                </Link>
+              </p>
             </div>
           )}
         </div>

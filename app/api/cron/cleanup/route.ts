@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/turso";
+import { getDb } from "@/lib/turso";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 30;
@@ -10,7 +10,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   try {
-    const r = await db.execute({
+    const r = await getDb().execute({
       sql: "DELETE FROM greetings WHERE expires_at <= datetime('now')",
       args: [],
     });

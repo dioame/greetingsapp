@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/turso";
+import { getDb } from "@/lib/turso";
 import bcrypt from "bcryptjs";
 import { nanoid } from "nanoid";
 
@@ -13,7 +13,7 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
-    const existing = await db.execute({
+    const existing = await getDb().execute({
       sql: "SELECT id FROM users WHERE email = ?",
       args: [email],
     });
@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     }
     const hash = await bcrypt.hash(password, 10);
     const id = nanoid();
-    await db.execute({
+    await getDb().execute({
       sql: "INSERT INTO users (id, email, name, password_hash) VALUES (?, ?, ?, ?)",
       args: [id, email, name ?? null, hash],
     });

@@ -12,6 +12,8 @@ import { MothersDay } from "@/components/greetings/MothersDay";
 import { FathersDay } from "@/components/greetings/FathersDay";
 import { WomensMonth } from "@/components/greetings/WomensMonth";
 import { ChristmasDay } from "@/components/greetings/ChristmasDay";
+import { FlowerGreetings } from "@/components/greetings/FlowerGreetings";
+import { GreetingsBottle } from "@/components/greetings/GreetingsBottle";
 
 type Greeting = {
   recipientName: string;
@@ -33,6 +35,9 @@ const designMap: Record<string, React.ComponentType<{ greeting: Greeting }>> = {
   fathers_day: FathersDay,
   womens_month: WomensMonth,
   christmas_day: ChristmasDay,
+  flower_greetings: FlowerGreetings,
+  greetings_bottle: GreetingsBottle,
+  greetings_bottle_2: GreetingsBottle,
 };
 
 export function GreetingView({ greeting }: { greeting: Greeting }) {

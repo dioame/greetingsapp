@@ -104,8 +104,11 @@ export function WomensMonth({ greeting }: { greeting: Greeting }) {
               — {greeting.senderName}
             </p>
           )}
-          <p style={{ marginTop: "1.5rem", fontSize: "0.75rem", color: purpleLight }}>
-            <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>Awesome Greetings</Link>
+          <p style={{ marginTop: "1.5rem", fontSize: "0.75rem", color: purpleLight, opacity: 0.95 }}>
+            Greet with{" "}
+            <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>
+              Awesome Greetings
+            </Link>
           </p>
         </div>
       </div>

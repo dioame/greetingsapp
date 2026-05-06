@@ -250,6 +250,12 @@ export function SwipableBook({ greeting }: { greeting: Greeting }) {
                   — {greeting.senderName}
                 </p>
               )}
+              <p style={{ marginTop: "1.5rem", fontSize: "0.8rem", color: "rgba(255,255,255,0.5)" }}>
+                Greet with{" "}
+                <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>
+                  Awesome Greetings
+                </Link>
+              </p>
               <p style={{ marginTop: "1rem", fontSize: "0.85rem", color: "rgba(255,255,255,0.5)" }}>
                 Swipe or tap for closing
               </p>
@@ -273,6 +279,7 @@ export function SwipableBook({ greeting }: { greeting: Greeting }) {
             >
               <div style={{ width: "48px", height: "3px", background: accentColor, marginBottom: "1.5rem" }} />
               <p style={{ color: "rgba(255,255,255,0.9)", fontSize: "1rem" }}>
+                Greet with{" "}
                 <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>
                   Awesome Greetings
                 </Link>

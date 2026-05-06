@@ -1,11 +1,18 @@
-import { createClient } from "@libsql/client";
+import { createClient, type Client } from "@libsql/client";
 
-// Turso (libSQL): set TURSO_DATABASE_URL + TURSO_AUTH_TOKEN in .env.local
-// Otherwise falls back to local SQLite file for development
-const url = process.env.TURSO_DATABASE_URL ?? "file:local.db";
-const authToken = process.env.TURSO_AUTH_TOKEN;
+/**
+ * Lazy LibSQL client so `TURSO_DATABASE_URL` is read after Next loads `.env.local`.
+ * Recreates the client if the URL changes (e.g. dev vs deploy).
+ */
+let _db: Client | undefined;
+let _cachedUrl: string | undefined;
 
-export const db = createClient({
-  url,
-  authToken: authToken || undefined,
-});
+export function getDb(): Client {
+  const url = process.env.TURSO_DATABASE_URL ?? "file:local.db";
+  const authToken = process.env.TURSO_AUTH_TOKEN || undefined;
+  if (!_db || _cachedUrl !== url) {
+    _cachedUrl = url;
+    _db = createClient({ url, authToken });
+  }
+  return _db;
+}

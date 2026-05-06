@@ -27,7 +27,7 @@ export function DashboardClient() {
   useEffect(() => {
     fetch("/api/designs")
       .then((r) => r.json())
-      .then(setDesigns)
+      .then((data) => setDesigns(Array.isArray(data) ? data : []))
       .catch(() => setDesigns([]));
   }, []);
 
@@ -129,6 +129,13 @@ export function DashboardClient() {
       }}>
         <label>
           <span style={{ display: "block", marginBottom: "0.25rem", color: "var(--muted)" }}>Design</span>
+          {designs.length === 0 && (
+            <p style={{ fontSize: "0.82rem", color: "var(--muted)", marginBottom: "0.5rem", lineHeight: 1.45 }}>
+              No templates in your database yet. In the project folder run{" "}
+              <code style={{ fontSize: "0.78rem", color: "var(--text)" }}>npm run db:seed</code>{" "}
+              (uses <code style={{ fontSize: "0.78rem", color: "var(--text)" }}>.env.local</code>), then refresh this page.
+            </p>
+          )}
           <select
             value={designId}
             onChange={(e) => setDesignId(e.target.value)}
