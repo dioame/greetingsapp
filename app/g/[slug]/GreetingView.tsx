@@ -37,7 +37,6 @@ const designMap: Record<string, React.ComponentType<{ greeting: Greeting }>> = {
   christmas_day: ChristmasDay,
   flower_greetings: FlowerGreetings,
   greetings_bottle: GreetingsBottle,
-  greetings_bottle_2: GreetingsBottle,
 };
 
 export function GreetingView({ greeting }: { greeting: Greeting }) {

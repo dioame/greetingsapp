@@ -186,16 +186,4 @@ export const DEFAULT_GREETING_DESIGNS: readonly DefaultGreetingDesignRow[] = [
       labelText: "SHAKE ME",
     }),
   },
-  {
-    id: "design-greetings-bottle-2",
-    slug: "greetings-bottle-2",
-    name: "Greetings Bottle (2)",
-    description: "Another bottle style with a different vibe (shake/tap to reveal).",
-    design_type: "greetings_bottle_2",
-    config_json: JSON.stringify({
-      bottleColor: "#0b1220",
-      accentColor: "#fb7185",
-      labelText: "OPEN ME",
-    }),
-  },
 ];

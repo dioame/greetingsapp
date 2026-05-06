@@ -57,9 +57,7 @@ function usePrefersReducedMotion() {
 
 export function GreetingsBottle({ greeting }: { greeting: Greeting }) {
   const config = (greeting.design.config ?? {}) as BottleConfig;
-  const bottleColor = config.bottleColor || "#1f2937";
   const accentColor = config.accentColor || "#a78bfa";
-  const labelText = config.labelText || "SHAKE ME";
   const reducedMotion = usePrefersReducedMotion();
 
   const [revealed, setRevealed] = useState(false);
@@ -157,6 +155,7 @@ export function GreetingsBottle({ greeting }: { greeting: Greeting }) {
         @media (prefers-reduced-motion: reduce) {
           .gb-shake { animation: none !important; }
           .gb-float { animation: none !important; }
+          .gb-card { animation: none !important; }
         }
         @keyframes gbFloat {
           0% { transform: translateY(0); }
@@ -170,6 +169,10 @@ export function GreetingsBottle({ greeting }: { greeting: Greeting }) {
           60% { transform: rotate(-1deg) translateX(-1px); }
           80% { transform: rotate(1deg) translateX(1px); }
           100% { transform: rotate(0deg) translateX(0); }
+        }
+        @keyframes gbCardZoomOut {
+          from { opacity: 0; transform: translate(-50%, -50%) scale(1.12); }
+          to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         }
       `}</style>
 
@@ -187,126 +190,90 @@ export function GreetingsBottle({ greeting }: { greeting: Greeting }) {
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setRevealed(true)}
-          className={revealed ? "gb-float" : "gb-shake"}
-          aria-label={revealed ? "Bottle opened" : "Shake to open bottle"}
-          style={{
-            width: "100%",
-            border: "none",
-            background: "transparent",
-            cursor: revealed ? "default" : "pointer",
-            padding: 0,
-            outline: "none",
-            animation: revealed ? "gbFloat 2.4s ease-in-out infinite" : "gbShake 1.35s ease-in-out infinite",
-          }}
-        >
-          <div
+        <div style={{ position: "relative", display: "grid", placeItems: "center" }}>
+          <button
+            type="button"
+            onClick={() => setRevealed(true)}
+            className={revealed ? "gb-float" : "gb-shake"}
+            aria-label={revealed ? "Bottle opened" : "Shake to open bottle"}
             style={{
-              margin: "0 auto",
-              width: "260px",
-              height: "420px",
-              position: "relative",
-              filter: "drop-shadow(0 25px 60px rgba(0,0,0,0.55))",
+              width: "100%",
+              border: "none",
+              background: "transparent",
+              cursor: revealed ? "default" : "pointer",
+              padding: 0,
+              outline: "none",
+              animation: revealed ? "gbFloat 2.4s ease-in-out infinite" : "gbShake 1.35s ease-in-out infinite",
             }}
           >
-            {/* Bottle */}
             <div
               style={{
-                position: "absolute",
-                left: "50%",
-                top: 0,
-                transform: "translateX(-50%)",
-                width: "180px",
+                margin: "0 auto",
+                width: "260px",
                 height: "420px",
-                borderRadius: "90px 90px 48px 48px",
-                background: `linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02)), ${bottleColor}`,
-                border: "1px solid rgba(255,255,255,0.10)",
-                overflow: "hidden",
+                position: "relative",
+                filter: "drop-shadow(0 25px 60px rgba(0,0,0,0.55))",
+                transform: revealed ? "scale(0.92)" : "scale(1)",
+                transition: "transform 450ms cubic-bezier(0.22, 1, 0.36, 1)",
               }}
             >
-              {/* Neck */}
-              <div
+              {/* Bottle image (user-provided) */}
+              <img
+                src="/assets/bottle.webp"
+                alt=""
                 style={{
                   position: "absolute",
-                  left: "50%",
-                  top: "10px",
-                  transform: "translateX(-50%)",
-                  width: "92px",
-                  height: "92px",
-                  borderRadius: "46px",
-                  background: "rgba(255,255,255,0.06)",
-                  border: "1px solid rgba(255,255,255,0.10)",
-                }}
-              />
-
-              {/* Label */}
-              <div
-                style={{
-                  position: "absolute",
-                  left: "50%",
-                  top: "155px",
-                  transform: "translateX(-50%)",
-                  width: "132px",
-                  padding: "0.75rem 0.6rem",
-                  borderRadius: "12px",
-                  background: "rgba(0,0,0,0.28)",
-                  border: `1px solid rgba(167,139,250,0.35)`,
-                  color: "rgba(255,255,255,0.86)",
-                  fontSize: "0.78rem",
-                  letterSpacing: "0.18em",
-                  textAlign: "center",
-                }}
-              >
-                {labelText}
-              </div>
-
-              {/* Surprise image revealed by shake/tap */}
-              <div
-                style={{
-                  position: "absolute",
-                  left: "50%",
-                  top: "220px",
-                  transform: "translateX(-50%)",
-                  width: "160px",
-                  height: "140px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  opacity: revealed ? 1 : 0,
-                  transition: "opacity 450ms ease",
-                }}
-              >
-                <img
-                  src={revealImageDataUrl}
-                  alt=""
-                  style={{
-                    width: "160px",
-                    height: "140px",
-                    objectFit: "contain",
-                    filter: "drop-shadow(0 12px 25px rgba(0,0,0,0.45))",
-                  }}
-                />
-              </div>
-
-              {/* Glass highlight */}
-              <div
-                aria-hidden
-                style={{
-                  position: "absolute",
-                  top: "0",
-                  left: "18px",
-                  width: "36px",
+                  inset: 0,
+                  width: "100%",
                   height: "100%",
-                  background: "linear-gradient(180deg, rgba(255,255,255,0.20), rgba(255,255,255,0.02))",
-                  transform: "skewX(-8deg)",
-                  opacity: 0.55,
+                  objectFit: "contain",
+                  userSelect: "none",
+                  pointerEvents: "none",
                 }}
               />
+
+              {/* (No label text / no heart icon) */}
+          </div>
+          </button>
+
+          {/* Overlay greeting card (revealed on shake/tap) */}
+          <div
+            className={revealed ? "gb-card" : undefined}
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "52%",
+              width: "min(520px, 92vw)",
+              maxWidth: "520px",
+              transform: "translate(-50%, -50%)",
+              opacity: revealed ? 1 : 0,
+              pointerEvents: revealed ? "auto" : "none",
+              transition: revealed ? "none" : "opacity 200ms ease",
+              animation: revealed ? "gbCardZoomOut 520ms cubic-bezier(0.22, 1, 0.36, 1) both" : "none",
+              zIndex: 5,
+            }}
+          >
+            <div
+              style={{
+                padding: "1.25rem 1.5rem",
+                borderRadius: "14px",
+                background: "rgba(10, 8, 14, 0.72)",
+                border: "1px solid rgba(255,255,255,0.10)",
+                backdropFilter: "blur(10px)",
+                boxShadow: "0 30px 90px rgba(0,0,0,0.55)",
+              }}
+            >
+              <p style={{ color: "rgba(255,255,255,0.92)", fontSize: "1.02rem", lineHeight: 1.85, whiteSpace: "pre-wrap", margin: 0 }}>
+                {greeting.message}
+              </p>
+              {greeting.senderName && (
+                <p style={{ marginTop: "1.25rem", color: "rgba(255,255,255,0.66)", fontStyle: "italic" }}>
+                  — {greeting.senderName}
+                </p>
+              )}
             </div>
           </div>
-        </button>
+        </div>
 
         <div
           style={{
@@ -324,14 +291,9 @@ export function GreetingsBottle({ greeting }: { greeting: Greeting }) {
             </p>
           ) : (
             <>
-              <p style={{ color: "rgba(255,255,255,0.92)", fontSize: "1.02rem", lineHeight: 1.85, whiteSpace: "pre-wrap", margin: 0 }}>
-                {greeting.message}
+              <p style={{ margin: 0, color: "rgba(255,255,255,0.6)", lineHeight: 1.7 }}>
+                Message is revealed on the bottle.
               </p>
-              {greeting.senderName && (
-                <p style={{ marginTop: "1.25rem", color: "rgba(255,255,255,0.66)", fontStyle: "italic" }}>
-                  — {greeting.senderName}
-                </p>
-              )}
             </>
           )}
           <p style={{ marginTop: "1.25rem", fontSize: "0.8rem", color: "rgba(255,255,255,0.45)" }}>
