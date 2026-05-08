@@ -24,7 +24,11 @@ export function WomensMonth({ greeting }: { greeting: Greeting }) {
         alignItems: "center",
         justifyContent: "center",
         padding: "2rem",
-        background: "linear-gradient(160deg, #ffffff 0%, #f8f5fc 50%, #ffffff 100%)",
+        backgroundImage:
+          "linear-gradient(160deg, rgba(255,255,255,0.92) 0%, rgba(248,245,252,0.9) 50%, rgba(255,255,255,0.92) 100%), url('/assets/womensmonth/10160546.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
         fontFamily: "'Cormorant Garamond', serif",
         position: "relative",
         overflow: "hidden",
